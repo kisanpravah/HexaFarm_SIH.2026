@@ -278,49 +278,48 @@ The WhatsApp/SMS sender number is treated as a **replaceable configuration**, no
 
 ## 🧠 Technology Stack
 
-| Layer | Technology | Purpose in the project |
-|---|---|---|
-| **Frontend** | Next.js | Build the web application, dashboards, forms and user-facing pages |
-| **UI** | Tailwind CSS + shadcn/ui | Create a clean, responsive and professional interface quickly |
-| **Icons** | Lucide | Consistent icons for buttons, menus, alerts and dashboards |
-| **Forms** | React Hook Form + Zod | Farmer registration, crop declaration and application forms with validation |
-| **Client State** | Zustand | Lightweight frontend state such as session-related UI state and filters |
-| **Server Data** | TanStack Query | Fetch, cache, update and synchronise data between frontend and backend |
-| **Backend** | Next.js API Routes / Hono | APIs for users, applications, tokens, notifications, AI features, etc. |
-| **Database** | PostgreSQL | Structured data: farmers, centres, crops, slots, tokens, documents, procurement status and payments |
-| **ORM** | Prisma | Type-safe access to PostgreSQL from TypeScript instead of raw SQL |
-| **Cache** | Redis | Live queue data and frequently accessed temporary data; improves speed |
-| **Jobs** | BullMQ | Background tasks such as sending SMS/WhatsApp notifications and heavy processing |
-| **Authentication** | Clerk | Secure login, registration, roles and session management |
-| **AI Chatbot** | OpenAI / Groq | AI assistant to answer questions and guide farmers through the system |
-| **ML Prediction** | Python + FastAPI + scikit-learn | Prediction models such as waiting time and queue congestion |
-| **Vector Search** *(optional)* | pgvector | Semantic search over government schemes, FAQs, documents and guidelines |
-| **WhatsApp** | WhatsApp Business API / provider | Application updates, reminders and notifications on WhatsApp |
-| **SMS** | Indian SMS Gateway / provider | OTPs, status updates, alerts and important notifications |
-| **Storage** | Amazon S3 | Uploaded documents, certificates, images and other files |
-| **Containers** | Docker | Package the application and its services so they run consistently everywhere |
-| **Deployment** | AWS | Host the application, database, storage, APIs and other services |
-| **Version Control** | GitHub | Source code, branches and team collaboration |
-| **Testing** | Vitest + Playwright | Vitest for unit/API tests, Playwright for complete user-workflow tests |
+| Layer               | Technology                                            | Purpose                                                              |
+| ------------------- | ----------------------------------------------------- | -------------------------------------------------------------------- |
+| **Frontend**        | **Angular + TypeScript**                              | Farmer & Centre web application                                      |
+| **UI**              | **Tailwind CSS + Angular Material**                   | Responsive interface                                                 |
+| **Forms**           | **Angular Reactive Forms**                            | Registration and booking forms                                       |
+| **State**           | **Angular Services + Signals**                        | Application state                                                    |
+| **Backend**         | **Node.js + Express.js**                              | REST APIs & business logic                                           |
+| **Database**        | **MongoDB + Mongoose**                                | Farmer, crop, centre, booking & procurement data                     |
+| **Real-Time**       | **Socket.IO**                                         | Live queue and centre updates                                        |
+| **AI**              | **OpenAI API**                                        | AI assistant, natural-language interaction, document/text assistance |
+| **Prediction**      | **Node.js-based prediction logic / ML service later** | Queue, waiting-time and overload prediction                          |
+| **File Storage**    | **AWS S3**                                            | Documents, receipts and uploaded files                               |
+| **Notifications**   | **Firebase Cloud Messaging + SMS Gateway**            | App notifications and SMS                                            |
+| **WhatsApp**        | **WhatsApp Business API**                             | Farmer alerts and status updates                                     |
+| **Multilingual**    | **Angular i18n / Translation JSON**                   | Marathi, Hindi, English                                              |
+| **Voice**           | **Speech-to-Text + Text-to-Speech**                   | Voice-enabled farmer interface                                       |
+| **Deployment**      | **AWS**                                               | Hosting and cloud infrastructure                                     |
+| **Version Control** | **Git + GitHub**                                      | Team development                                                     |
+
+
 
 ### Why we chose these technologies
 
-| Technology | Why we use it | Why alternatives were not preferred |
-|---|---|---|
-| **Next.js** | Full-stack React framework: routing, dashboards and APIs in one project | React + Express separately adds setup and two separate layers |
-| **TypeScript** | Type safety and easier maintenance for a large dashboard | Plain JavaScript can lead to more runtime errors in complex forms and data |
-| **Tailwind CSS** | Fast, consistent UI development | Traditional CSS needs more files and manual styling |
-| **shadcn/ui** | Reusable, professional dashboard components | Building every component from scratch wastes hackathon time |
-| **Lucide Icons** | Consistent, lightweight icons | Multiple icon libraries create unnecessary dependencies |
-| **Zustand** | Simple client-side state management | Redux is more boilerplate than this project needs |
-| **React Hook Form + Zod** | Efficient forms and validation | Manual form handling needs more code and error handling |
-| **PostgreSQL** | Relational data fits farmers, tokens, centres, slots, procurement and payments | MongoDB is less suitable for highly related transactional data |
-| **Prisma** | Easy, type-safe database access | Raw SQL needs more repetitive database code |
-| **Redis** | Fast live queue and cache data | A database alone is slower for frequently changing queue information |
-| **Python + FastAPI** | Good ecosystem for ML and queue prediction | Doing ML directly in Node.js is less convenient |
-| **scikit-learn** | Suitable for prediction models on structured data | Large deep-learning frameworks would be unnecessary for the initial problem |
-| **WhatsApp + SMS** | Reaches both smartphone and basic-phone users | WhatsApp alone excludes farmers without smartphones or internet |
-| **Docker** | Consistent development environment | Kubernetes / Docker Swarm would be overkill for a hackathon |
+| **Layer**           | **Technology**                             | **Why Chosen / Alternatives Not Preferred**                                                                  |
+| ------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| **Frontend**        | **Angular + TypeScript**                   | Structured, scalable framework; preferred over React/Next.js for an integrated TypeScript-based architecture |
+| **UI**              | **Tailwind CSS + Angular Material**        | Fast responsive UI with ready components; avoids building components from scratch                            |
+| **Forms**           | **Angular Reactive Forms**                 | Strong validation and structured form handling; preferred over manual form handling                          |
+| **State**           | **Angular Services + Signals**             | Built-in Angular approach; avoids adding an extra state-management library                                   |
+| **Backend**         | **Node.js + Express.js**                   | Lightweight and fits the TypeScript/JavaScript ecosystem; avoids a separate backend language                 |
+| **Database**        | **MongoDB + Mongoose**                     | Flexible document structure; preferred over rigid relational schema during rapid development                 |
+| **Real-Time**       | **Socket.IO**                              | Simple real-time communication; preferred over complex custom WebSocket implementation                       |
+| **AI**              | **OpenAI API**                             | Strong natural-language capabilities; preferred over maintaining a separate LLM infrastructure               |
+| **Prediction**      | **Node.js-based prediction logic**         | Easy integration with backend; avoids unnecessary Python/FastAPI dependency for the prototype                |
+| **File Storage**    | **AWS S3**                                 | Scalable and reliable object storage; preferred over storing files directly in the database                  |
+| **Notifications**   | **Firebase Cloud Messaging + SMS Gateway** | Supports both app and basic-phone communication; broader reach than app-only notifications                   |
+| **WhatsApp**        | **WhatsApp Business API**                  | Familiar communication channel for farmers; reduces dependence on app-only access                            |
+| **Multilingual**    | **Angular i18n / Translation JSON**        | Simple and maintainable multilingual implementation; avoids heavy translation frameworks                     |
+| **Voice**           | **Speech-to-Text + Text-to-Speech**        | Enables accessible voice interaction; avoids complex custom voice systems                                    |
+| **Deployment**      | **AWS**                                    | Scalable cloud infrastructure; suitable for phased deployment and future expansion                           |
+| **Version Control** | **Git + GitHub**                           | Standard collaborative development workflow; widely supported and easy to maintain                           |
+
 
 > The technology stack may be refined as development progresses. Deployment on production would follow the concerned department's approved hosting, data-sharing and retention requirements.
 
