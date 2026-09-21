@@ -197,43 +197,54 @@ The core idea is **Predict → Inform → Optimise → Notify**: the system does
 +------------------------------------------------------------------------+
 |                                 USERS                                  |
 |                                                                        |
-|  Farmers (WhatsApp / SMS / Web App)  |  Centre Operators  |  Officers  |
+|  Farmers (Web / WhatsApp / SMS)  |  Centre Operators  |  Admin/Officers|
 +------------------------------------------------------------------------+
                                      |
                                      v
 +------------------------------------------------------------------------+
 |                                FRONTEND                                |
 |                                                                        |
-|            Next.js + TypeScript + Tailwind CSS + shadcn/ui             |
-| React Hook Form + Zod  |  Zustand  |  TanStack Query  |  Lucide Icons  |
+|             Angular + TypeScript + Tailwind CSS + Angular Material     |
+|          Reactive Forms  |  Angular Services + Signals  |  i18n         |
 +------------------------------------------------------------------------+
-                                     ^
-                                     |  REST / API calls
+                                     |
+                                     | REST APIs / WebSockets
                                      v
 +--------------------+    +--------------------+    +--------------------+
-|   AUTHENTICATION   |    |   BACKEND / API    |    |      AI / ML       |
+|   AUTHENTICATION   |    |   BACKEND / API    |    |    AI ASSISTANCE   |
 |                    |    |                    |    |                    |
-|       Clerk        |    | Next.js API Routes |    |  Python + FastAPI  |
-|(OTP for prototype) |<-->|      or Hono       |<-->|    scikit-learn    |
-|                    |    |                    |    |OpenAI/Groq chatbot |
+| JWT Authentication |<-->| Node.js + Express  |<-->|    OpenAI API      |
+| Role-Based Access  |    | REST APIs          |    | AI Assistant       |
+|      Control       |    | Socket.IO          |    | Natural Language   |
 +--------------------+    +--------------------+    +--------------------+
                                      |
-                                     |  read / write data, queue jobs
+                                     | Read / Write Data
                                      v
-+---------------+  +---------------+  +---------------+  +---------------+
-|   PostgreSQL  |  |     Redis     |  |     BullMQ    |  |    pgvector   |
-|  + Prisma ORM |  |   Live queue  |  |Background jobs|  |   (Optional)  |
-|               |  |    + cache    |  |               |  |semantic search|
-+---------------+  +---------------+  +---------------+  +---------------+
++--------------------+    +--------------------+    +--------------------+
+|      DATABASE      |    |    PREDICTION      |    |   FILE STORAGE     |
+|                    |    |                    |    |                    |
+| MongoDB + Mongoose |    | Node.js Prediction |    |     AWS S3         |
+|                    |    |      Logic         |    | Documents/Receipts |
+| Farmers / Crops    |    | Demand Forecasting |    | Uploaded Files     |
+| Centres / Bookings |    | Queue Prediction  |    |                    |
+| Procurement/Payment|    | Waiting Time       |    |                    |
++--------------------+    | Capacity Planning  |    +--------------------+
+                          | Overload Detection |
+                          +--------------------+
                                      |
-                                     |  send alerts / store files
                                      v
-+---------------+  +---------------+  +---------------+  +---------------+
-|    WhatsApp   |  |  SMS Gateway  |  |   Amazon S3   |  |     Docker    |
-|  Business API |  |Indian provider|  |  File storage |  |   Containers  |
-+---------------+  +---------------+  +---------------+  +---------------+
++--------------------+    +--------------------+    +--------------------+
+|   NOTIFICATIONS    |    |  MULTILINGUAL/VOICE|    |     SECURITY       |
+|                    |    |                    |    |                    |
+| Firebase FCM       |    | Marathi / Hindi    |    | JWT Authentication |
+| SMS Gateway        |    | English            |    | RBAC               |
+| WhatsApp Business  |    | Speech-to-Text     |    | HTTPS / TLS        |
+| API                |    | Text-to-Speech     |    |                    |
++--------------------+    +--------------------+    +--------------------+
 
-Source control: GitHub   |   Testing: Vitest + Playwright   |   Hosting: AWS
+Source Control: Git + GitHub
+Testing: Unit / Integration / E2E
+Deployment: AWS + Docker
 ```
 
 ### Backend services
@@ -292,7 +303,7 @@ The WhatsApp/SMS sender number is treated as a **replaceable configuration**, no
 | **File Storage**    | **AWS S3**                                            | Documents, receipts and uploaded files                               |
 | **Notifications**   | **Firebase Cloud Messaging + SMS Gateway**            | App notifications and SMS                                            |
 | **WhatsApp**        | **WhatsApp Business API**                             | Farmer alerts and status updates                                     |
-| **Multilingual**    | **Angular i18n / Translation JSON**                   | Marathi, Hindi, English                                              |
+| **Multilingual**    | **Angular i18n / Translation JSON**                   | Multilinguage Support                                              |
 | **Voice**           | **Speech-to-Text + Text-to-Speech**                   | Voice-enabled farmer interface                                       |
 | **Deployment**      | **AWS**                                               | Hosting and cloud infrastructure                                     |
 | **Version Control** | **Git + GitHub**                                      | Team development                                                     |
