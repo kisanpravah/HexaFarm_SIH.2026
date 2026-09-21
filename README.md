@@ -415,7 +415,7 @@ Development begins with requirement analysis and rapid prototyping, followed by 
 
 | Area | Approach |
 |---|---|
-| **Technical** | Proven, scalable technologies — Next.js, PostgreSQL, Python/FastAPI, WhatsApp and SMS gateways, secure authentication |
+| **Technical** | Proven, scalable technologies — Node.js, Angular, Express.js, WhatsApp and SMS gateways, secure authentication |
 | **Operational** | Phased, centre-wise rollout that fits into existing procurement processes without disrupting operations |
 | **Adoption** | WhatsApp for smartphone users and two-way SMS for basic phones, in Marathi, Hindi and English |
 | **Scalability** | Modular architecture that can grow from pilot centres to district, state and national networks |
@@ -489,19 +489,22 @@ Existing government platforms and agricultural resources were studied to underst
 
 
 ```
-HexaFarm/
-|
-|-- README.md
-|
-|-- web/            # Next.js app: dashboards, farmer web app, API routes / Hono
-|
-|-- prisma/         # Prisma schema and migrations (PostgreSQL)
-|
-|-- ai-service/     # Python + FastAPI + scikit-learn prediction service
-|
-|-- tests/          # Vitest (unit/API) and Playwright (end-to-end)
-|
-|-- docker/         # Dockerfiles / docker-compose for local development
+KISAN-PRAVAH/
+│
+├── frontend/          # Angular + TypeScript
+├── backend/           # Node.js + Express.js
+├── models/            # MongoDB + Mongoose
+├── ai/                # OpenAI API
+├── prediction/        # Queue / Demand / Capacity Prediction
+├── storage/           # AWS S3
+├── notifications/     # Firebase / SMS / WhatsApp
+├── i18n/              # Multilingual
+├── voice/             # Speech-to-Text / Text-to-Speech
+├── tests/              # Unit / Integration / E2E
+├── docker/             # Docker Configuration
+├── .env.example
+├── .gitignore
+└── README.md
 ```
 
 ---
